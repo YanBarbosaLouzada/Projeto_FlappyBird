@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwjf1folrfcll"]
+
+[ext_resource type="Texture2D" uid="uid://drx10uoxjpba5" path="res://Assets/pipe-green.png" id="1_3jvhd"]
+[ext_resource type="Script" path="res://Scenes/pipe_pair.gd" id="1_o2m5h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1856"]
+size = Vector2(51, 486)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo8em"]
+size = Vector2(49, 22.6326)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn331"]
+size = Vector2(5.74468, 20)
+
+[node name="PipePair" type="Node2D"]
+script = ExtResource("1_o2m5h")
+
+[node name="TopPipe" type="Area2D" parent="."]
+position = Vector2(0, -300)
+rotation = 3.14159
+
+[node name="Sprite2D" type="Sprite2D" parent="TopPipe"]
+texture = ExtResource("1_3jvhd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_h1856")
+
+[node name="BottomPipe" type="Area2D" parent="."]
+position = Vector2(0, 300)
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomPipe"]
+texture = ExtResource("1_3jvhd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe"]
+position = Vector2(0.5, 0)
+scale = Vector2(1, 21.12)
+shape = SubResource("RectangleShape2D_yo8em")
+
+[node name="Scored" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scored"]
+position = Vector2(38, 0)
+scale = Vector2(1.88, 6.24)
+shape = SubResource("RectangleShape2D_cn331")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="TopPipe" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="BottomPipe" to="." method="_on_body_entered"]
+[connection signal="body_entered" from="BottomPipe" to="." method="on_point_scored"]
+[connection signal="body_entered" from="Scored" to="." method="_on_scored_body_entered"]
+[connection signal="body_entered" from="Scored" to="." method="_on_point_scored"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

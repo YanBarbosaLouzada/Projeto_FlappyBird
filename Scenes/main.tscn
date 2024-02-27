@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://p1ukwo1jwf04"]
+
+[ext_resource type="Texture2D" uid="uid://bwf5i0qyei8n0" path="res://Assets/background-day.png" id="1_blo3y"]
+[ext_resource type="Script" path="res://Scenes/GameManager.gd" id="1_e678t"]
+[ext_resource type="PackedScene" uid="uid://b74bn6lhlyiuq" path="res://Scenes/bird.tscn" id="1_ey4od"]
+[ext_resource type="PackedScene" uid="uid://0pedt5od4vq7" path="res://Scenes/ground.tscn" id="3_inxbw"]
+[ext_resource type="PackedScene" uid="uid://0d74kw2y1yyb" path="res://Scenes/pipe_spawner.tscn" id="4_vs53y"]
+[ext_resource type="PackedScene" uid="uid://celmud1omq3nm" path="res://Scenes/ui.tscn" id="6_duyle"]
+
+[node name="main" type="Node"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_e678t")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_blo3y")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Ground" parent="." instance=ExtResource("3_inxbw")]
+position = Vector2(23, 204)
+
+[node name="PipeSpawner" parent="." instance=ExtResource("4_vs53y")]
+
+[node name="Bird" parent="." instance=ExtResource("1_ey4od")]
+
+[node name="UI" parent="." instance=ExtResource("6_duyle")]
